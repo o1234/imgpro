@@ -13,20 +13,40 @@ function crop
         Write-Host "fix_: "+$fix_
         $imgr=identify -format '%[fx:w/h]' $SRS`.$format
         if ($imgr -ge 3.5){
-            $nW=4*$H
-            $nH=$H
+            if ( $imgr -ge 4 ){
+                $nW=4*$H
+                $nH=$H
+            }else{
+                $nW=$nW
+                $nH=$nW/4
+            }
             $index=4
         }elseif($imgr -ge 1.5){
-            $nW=2*$H
-            $nH=$H
+            if ( $imgr -ge 2 ){
+                $nW=2*$H
+                $nH=$H
+            }else{
+                $nW=$nW
+                $nH=$nW/2
+            }
             $index=2
         }elseif($imgr -ge 0.835){
-            $nW=$H
-            $nH=$H
+            if ( $imgr -ge 1 ){
+                $nW=1*$H
+                $nH=$H
+            }else{
+                $nW=$nW
+                $nH=$nW/1
+            }
             $index=1
         }elseif($Imgr -ge 0.6){
-            $nW=0.67*$H
-            $nH=$H
+            if ( $imgr -ge 0.67 ){
+                $nW=0.67*$H
+                $nH=$H
+            }else{
+                $nW=$nW
+                $nH=$nW/0.67
+            }
             $index=0.67
         }else{
             $index=error
